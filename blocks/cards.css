@@ -11,4 +11,12 @@
   grid-template-columns: repeat(auto-fit, 413px);
   gap: 40px 20px;
   justify-content: center;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 627px) {
+  .cards__list {
+    grid-template-columns: repeat(auto-fit, 288px);
+  }
 }
