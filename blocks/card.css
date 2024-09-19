@@ -50,5 +50,6 @@
   }
 
   .card__like-btn {
+    background-repeat: no-repeat;
   }
 }
