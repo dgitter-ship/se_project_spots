@@ -24,6 +24,8 @@
   color: #212121;
   font-size: 20px;
   line-height: 24px;
+  margin: 0;
+  padding: 12px 0 4px;
 }
 
 .card__like-btn {
@@ -37,11 +39,14 @@
 
 .card__like-btn:hover {
   cursor: pointer;
-  color: #212121;
   opacity: 1;
 }
 
 @media screen and (max-width: 627px) {
+  .card {
+    width: 280px;
+  }
+
   .card__image {
     height: 288px;
   }
@@ -50,7 +55,7 @@
     position: relative;
     width: 100%;
     height: auto;
-    padding: 12px 0 20px;
+    padding: 12px 0 2px;
   }
 
   .card__title {
