@@ -19,6 +19,7 @@
   font-weight: 500;
   line-height: 1;
   font-size: 32px;
+  color: #212121;
 }
 
 .profile__description {
@@ -26,6 +27,7 @@
   line-height: 16px;
   font-weight: 500;
   opacity: 70%;
+  font-size: 16px;
 }
 
 .profile__edit-btn {
@@ -97,9 +99,6 @@
 
   .profile__column {
     margin-bottom: 20px;
-  }
-
-  .profile__description {
   }
 
   .profile__edit-btn {

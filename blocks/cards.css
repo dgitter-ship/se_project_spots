@@ -13,6 +13,7 @@
   justify-content: center;
   line-height: 24px;
   font-weight: 500;
+  padding-bottom: 40px;
 }
 
 @media screen and (max-width: 627px) {
@@ -21,7 +22,8 @@
   }
 
   .cards__list {
-    grid-template-columns: repeat(auto-fit, 288px);
+    grid-template-columns: repeat(auto-fit, 280px);
     row-gap: 20px;
+    padding-bottom: 20px;
   }
 }
