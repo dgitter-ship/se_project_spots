@@ -20,6 +20,12 @@
   line-height: 1;
   font-size: 32px;
   color: #212121;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  max-width: 420px;
 }
 
 .profile__description {
@@ -28,6 +34,13 @@
   font-weight: 500;
   opacity: 70%;
   font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  max-width: 420px;
+  color: #212121;
 }
 
 .profile__edit-btn {
@@ -95,6 +108,11 @@
   .profile__name {
     font-size: 20px;
     margin-bottom: 6px;
+    max-width: 280px;
+  }
+
+  .profile__description {
+    max-width: 280px;
   }
 
   .profile__column {
