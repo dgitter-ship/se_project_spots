@@ -35,11 +35,16 @@
   background-image: url(../images/close-btn.svg);
   border: none;
   opacity: 40%;
+  background-color: transparent;
+}
+
+.modal__close-btn:hover {
+  opacity: 1;
 }
 
 .modal__title {
   margin: 0 0 32px;
-  font-family: Poppins;
+  font-family: "Poppins";
   font-size: 32px;
   font-weight: 500;
   line-height: 32px;
@@ -51,7 +56,7 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 32px;
-  font-family: Poppins;
+  font-family: "Poppins";
   font-size: 16px;
   font-weight: 500;
   line-height: 17.6px;
@@ -62,7 +67,7 @@
 
 .modal__input {
   padding: 16px 12px;
-  font-family: Poppins;
+  font-family: "Poppins";
   font-size: 20px;
   font-weight: 500;
   line-height: 20px;
@@ -76,6 +81,9 @@
   background-color: #212121;
   color: #fcf5e5;
   border-radius: 8px;
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: 500;
 }
 
 @media screen and (max-width: 627px) {
