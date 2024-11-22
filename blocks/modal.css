@@ -43,6 +43,13 @@
   cursor: pointer;
 }
 
+.modal__close-btn-preview {
+  background-image: url(../images/Close-btn-preview.svg);
+  top: 95px;
+  right: 490px;
+  opacity: 1;
+}
+
 .modal__title {
   margin: 0 0 32px;
   font-family: "Poppins";
@@ -90,6 +97,18 @@
   font-family: "Poppins";
   font-size: 16px;
   font-weight: 500;
+}
+
+.modal__content {
+  padding: 0;
+  max-width: 900px;
+}
+
+.modal__image {
+  width: 100%;
+  max-width: 80vh;
+  max-height: 80vh;
+  object-fit: contain;
 }
 
 @media screen and (max-width: 627px) {

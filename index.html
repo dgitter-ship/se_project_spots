@@ -41,6 +41,7 @@
           <ul class="cards__list">
             <template id="card-template">
               <li class="card">
+                <button type="button" class="card__delete-btn"></button>
                 <img src="" alt="" class="card__image" />
                 <div class="card__content">
                   <h2 class="card__title"></h2>
@@ -107,6 +108,22 @@
             </label>
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
+          <button type="button" class="modal__delete-btn"></button>
+        </div>
+      </div>
+      <div class="modal modal_opened" id="preview-modal">
+        <div class="modal__content">
+          <button
+            type="button"
+            class="modal__close-btn modal__close-btn-preview"
+          ></button>
+          <img
+            class="modal__image"
+            src="https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg"
+            ;
+            alt=""
+          />
+          <p class="modal__caption">Val Thorens</p>
         </div>
       </div>
     </div>

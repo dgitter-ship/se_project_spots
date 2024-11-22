@@ -53,6 +53,22 @@
   background-image: url(../images/liked-hover.svg);
 }
 
+.card__delete-btn {
+  background-image: url(../images/delete-btn.svg);
+  width: 32px;
+  height: 32px;
+  position: relative;
+  left: 371px;
+  top: 45px;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.card__delete-btn:hover {
+  background-image: url(../images/delete-btn-hover.svg);
+}
+
 @media screen and (max-width: 627px) {
   .card {
     width: 280px;
