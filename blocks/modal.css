@@ -45,8 +45,8 @@
 
 .modal__close-btn-preview {
   background-image: url(../images/Close-btn-preview.svg);
-  top: 95px;
-  right: 490px;
+  top: -12px;
+  right: -52px;
   opacity: 1;
 }
 
@@ -101,7 +101,9 @@
 
 .modal__content {
   padding: 0;
-  max-width: 900px;
+  top: 81px;
+  position: absolute;
+  padding: 0 8px 0;
 }
 
 .modal__image {
@@ -109,6 +111,21 @@
   max-width: 80vh;
   max-height: 80vh;
   object-fit: contain;
+  padding: 0 0 8px;
+}
+
+.modal__caption {
+  color: #fff;
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  background-color: #212121;
+  width: 214px;
+  border-radius: 8px;
+  padding: 4px 8px 4px;
+  margin: 0;
 }
 
 @media screen and (max-width: 627px) {
@@ -141,5 +158,15 @@
 
   .modal__submit-btn {
     width: 100%;
+  }
+
+  .modal__content {
+    max-width: 100%;
+    position: relative;
+  }
+
+  .modal__close-btn-preview {
+    top: -45px;
+    right: 0;
   }
 }

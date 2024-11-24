@@ -94,4 +94,8 @@
   .card__like-btn {
     background-repeat: no-repeat;
   }
+
+  .card__delete-btn {
+    left: 246px;
+  }
 }

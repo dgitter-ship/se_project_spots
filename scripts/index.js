@@ -49,7 +49,7 @@ const cardsList = document.querySelector(".cards__list");
 
 const cardPreviewModal = document.querySelector("#preview-modal");
 const cardImagePreview = cardPreviewModal.querySelector(".modal__image");
-const cardCaptionPreview = cardPreviewModal.querySelector(".modal__capton");
+const cardCaptionPreview = cardPreviewModal.querySelector(".modal__caption");
 const previewModalCloseBtn = cardPreviewModal.querySelector(
   ".modal__close-btn-preview"
 );
