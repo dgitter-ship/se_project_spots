@@ -104,7 +104,6 @@
 }
 
 .modal__content {
-  padding: 0;
   top: 81px;
   position: absolute;
   padding: 0 8px 0;
@@ -117,6 +116,7 @@
   max-height: 80vh;
   object-fit: contain;
   padding: 0 0 8px;
+  border-radius: 8px;
 }
 
 .modal__caption {
@@ -169,22 +169,26 @@
     max-width: 100%;
     position: absolute;
     top: 206px;
+    padding: 0 16px 0;
   }
 
   .modal__image {
     transform: scale(1, 1.2);
     max-height: 60vh;
     width: 280px;
+    padding-bottom: 32px;
+    margin-bottom: 8px;
   }
 
   .modal__close-btn-preview {
-    top: -65px;
+    top: -50px;
     z-index: 1;
     position: absolute;
   }
 
   .modal__caption {
     position: absolute;
-    bottom: -90px;
+    font-size: 16px;
+    line-height: 19px;
   }
 }
