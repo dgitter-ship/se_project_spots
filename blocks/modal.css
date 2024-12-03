@@ -181,10 +181,10 @@
   }
 
   .modal__close-btn-preview {
-    top: -8px;
+    top: -40px;
     left: 248px;
     z-index: 1;
-    position: relative;
+    position: absolute;
   }
 
   .modal__caption {
