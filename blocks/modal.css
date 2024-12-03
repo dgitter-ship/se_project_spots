@@ -127,10 +127,13 @@
   line-height: 24px;
   text-align: center;
   background-color: #212121;
-  width: 214px;
+  max-width: fit-content;
   border-radius: 8px;
   padding: 4px 8px 4px;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 627px) {
@@ -167,28 +170,26 @@
 
   .modal__content {
     max-width: 100%;
-    position: absolute;
-    top: 206px;
+    position: relative;
+    /* top: 206px; */
     padding: 0 16px 0;
   }
 
   .modal__image {
-    transform: scale(1, 1.2);
     max-height: 60vh;
-    width: 280px;
-    padding-bottom: 32px;
-    margin-bottom: 8px;
+    width: 285px;
   }
 
   .modal__close-btn-preview {
-    top: -50px;
+    top: -8px;
+    left: 248px;
     z-index: 1;
-    position: absolute;
+    position: relative;
   }
 
   .modal__caption {
-    position: absolute;
     font-size: 16px;
     line-height: 19px;
+    max-width: 175px;
   }
 }
