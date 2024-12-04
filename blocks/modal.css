@@ -101,6 +101,7 @@
   font-family: "Poppins";
   font-size: 16px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .modal__content {
@@ -177,7 +178,8 @@
 
   .modal__image {
     max-height: 60vh;
-    width: 285px;
+    width: 280px;
+    padding: 0;
   }
 
   .modal__close-btn-preview {
