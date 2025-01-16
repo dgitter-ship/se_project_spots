@@ -52,6 +52,8 @@ const cardCaptionPreview = cardPreviewModal.querySelector(".modal__caption");
 const previewModalCloseBtn =
   cardPreviewModal.querySelector("#preview-close-btn");
 
+const modalOverlay = document.querySelector(".modal");
+
 function getCardElement(data) {
   const cardElement = cardTemplate.content
     .querySelector(".card")
@@ -82,6 +84,12 @@ function getCardElement(data) {
   });
 
   return cardElement;
+}
+
+function keyHandler(evt) {
+  if (evt.key === "Esc") {
+    closeModal(editModal, cardModal, cardPreviewModal);
+  }
 }
 
 function openModal(modal) {
@@ -115,6 +123,12 @@ previewModalCloseBtn.addEventListener("click", () => {
   closeModal(cardPreviewModal);
 });
 
+modalOverlay.addEventListener("click", () => {
+  closeModal(editModal, cardModal, cardPreviewModal);
+  console.log(modalOverlay);
+});
+// NEED HELP
+
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
 }
@@ -143,3 +157,4 @@ initialCards.forEach((item) => {
   const cardElement = getCardElement(item);
   cardsList.prepend(cardElement);
 });
+console.log(modalOverlay);
