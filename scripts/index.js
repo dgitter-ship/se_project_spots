@@ -123,11 +123,22 @@ previewModalCloseBtn.addEventListener("click", () => {
   closeModal(cardPreviewModal);
 });
 
-modalOverlay.addEventListener("click", () => {
-  closeModal(editModal, cardModal, cardPreviewModal);
-  console.log(modalOverlay);
-});
+//modalOverlay.addEventListener("click", () => {
+//  closeModal(editModal, cardModal, cardPreviewModal);
+// console.log(modalOverlay);
+//});
 // NEED HELP
+
+// TO DO - Turn modal into array.
+
+modalOverlay.forEach((modal) => {
+  modal.addEventListener("click", (event) => {
+    // Check if the click happened on the overlay, not on the content inside the modal
+    if (event.target === modal) {
+      closeModal(modal);
+    }
+  });
+});
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
