@@ -52,7 +52,7 @@ const cardCaptionPreview = cardPreviewModal.querySelector(".modal__caption");
 const previewModalCloseBtn =
   cardPreviewModal.querySelector("#preview-close-btn");
 
-const modalOverlay = document.querySelector(".modal");
+const modalOverlay = document.querySelectorAll(".modal");
 
 function getCardElement(data) {
   const cardElement = cardTemplate.content
@@ -86,12 +86,6 @@ function getCardElement(data) {
   return cardElement;
 }
 
-function keyHandler(evt) {
-  if (evt.key === "Esc") {
-    closeModal(editModal, cardModal, cardPreviewModal);
-  }
-}
-
 function openModal(modal) {
   modal.classList.add("modal_opened");
 }
@@ -123,18 +117,19 @@ previewModalCloseBtn.addEventListener("click", () => {
   closeModal(cardPreviewModal);
 });
 
-//modalOverlay.addEventListener("click", () => {
-//  closeModal(editModal, cardModal, cardPreviewModal);
-// console.log(modalOverlay);
-//});
-// NEED HELP
-
-// TO DO - Turn modal into array.
-
 modalOverlay.forEach((modal) => {
   modal.addEventListener("click", (event) => {
     // Check if the click happened on the overlay, not on the content inside the modal
     if (event.target === modal) {
+      closeModal(modal);
+    }
+  });
+});
+
+modalOverlay.forEach((modal) => {
+  modal.addEventListener("keyup", (event) => {
+    // Check if the click happened on the overlay, not on the content inside the modal
+    if (event.key === "Escape") {
       closeModal(modal);
     }
   });
@@ -168,4 +163,3 @@ initialCards.forEach((item) => {
   const cardElement = getCardElement(item);
   cardsList.prepend(cardElement);
 });
-console.log(modalOverlay);
