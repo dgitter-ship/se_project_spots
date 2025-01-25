@@ -88,6 +88,7 @@ function getCardElement(data) {
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", escapeCloseModal);
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -126,17 +127,26 @@ modalOverlay.forEach((modal) => {
   });
 });
 
-modalOverlay.forEach((modal) => {
-  modal.addEventListener("keyup", (event) => {
-    // Check if the click happened on the overlay, not on the content inside the modal
-    if (event.key === "Escape") {
+function escapeCloseModal(evt) {
+  modalOverlay.forEach((modal) => {
+    if (evt.key === "Escape") {
       closeModal(modal);
     }
   });
-});
+}
+
+// modalOverlay.forEach((modal) => {
+//   modal.addEventListener("keydown", (event) => {
+//     // Check if the click happened on the overlay, not on the content inside the modal
+//     if (event.key === "Escape") {
+//       closeModal(modal);
+//     }
+//   });
+// });
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", escapeCloseModal);
 }
 
 function handleEditFormSubmit(evt) {

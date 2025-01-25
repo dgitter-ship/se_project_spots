@@ -34,17 +34,20 @@ const hasInvalidInput = (inputList) => {
 };
 
 const toggleButtonState = (inputList, buttonEl, config) => {
+  console.log(inputList, hasInvalidInput(inputList));
   if (hasInvalidInput(inputList)) {
-    disableButton(buttonEl);
+    console.log("do w ehave invalid inputs");
+    disableButton(buttonEl, config);
   } else {
-    buttonEl.classList.remove("btn_disabled");
+    buttonEl.classList.remove(config.inactiveButtonClass);
     buttonEl.disabled = false;
   }
 };
 
 const disableButton = (buttonEl, config) => {
+  console.log(buttonEl);
   buttonEl.disabled = true;
-  buttonEl.classList.add(".btn_disabled");
+  buttonEl.classList.add(config.inactiveButtonClass);
 };
 
 const resetValidation = (formEl, inputList, config) => {
