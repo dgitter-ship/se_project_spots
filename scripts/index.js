@@ -39,7 +39,7 @@ const editModalDescriptionInput = document.querySelector("#description");
 const cardModal = document.querySelector("#add-card-modal");
 const cardCloseButton = cardModal.querySelector("#card-close-btn");
 const cardForm = cardModal.querySelector(".modal__form");
-cardSubmitButton = cardModal.querySelector(".modal__submit-btn");
+const cardSubmitButton = cardModal.querySelector(".modal__submit-btn");
 const cardLinkInput = cardModal.querySelector("#add-card-link");
 const cardNameInput = cardModal.querySelector("#add-card-name");
 
@@ -52,7 +52,7 @@ const cardCaptionPreview = cardPreviewModal.querySelector(".modal__caption");
 const previewModalCloseBtn =
   cardPreviewModal.querySelector("#preview-close-btn");
 
-const modalOverlay = document.querySelectorAll(".modal");
+const modalOverlays = document.querySelectorAll(".modal");
 
 function getCardElement(data) {
   const cardElement = cardTemplate.content
@@ -88,7 +88,7 @@ function getCardElement(data) {
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", escapeCloseModal);
+  document.addEventListener("keydown", closeEscapeBtn);
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -118,7 +118,7 @@ previewModalCloseBtn.addEventListener("click", () => {
   closeModal(cardPreviewModal);
 });
 
-modalOverlay.forEach((modal) => {
+modalOverlays.forEach((modal) => {
   modal.addEventListener("click", (event) => {
     // Check if the click happened on the overlay, not on the content inside the modal
     if (event.target === modal) {
@@ -127,8 +127,8 @@ modalOverlay.forEach((modal) => {
   });
 });
 
-function escapeCloseModal(evt) {
-  modalOverlay.forEach((modal) => {
+function closeEscapeBtn(evt) {
+  modalOverlays.forEach((modal) => {
     if (evt.key === "Escape") {
       closeModal(modal);
     }
@@ -146,7 +146,7 @@ function escapeCloseModal(evt) {
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", escapeCloseModal);
+  document.removeEventListener("keydown", closeEscapeBtn);
 }
 
 function handleEditFormSubmit(evt) {

@@ -120,7 +120,7 @@
   opacity: 70%;
 }
 
-.btn_disabled {
+.modal__submit-btn_disabled {
   background-color: rgba(33, 33, 33, 0.4);
   /* opacity: 50%; */
 }
