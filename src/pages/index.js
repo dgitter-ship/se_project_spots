@@ -1,3 +1,4 @@
+import Api from "../utils/Api.js";
 import "./index.css";
 import profileSrc from "../images/avatar.jpg";
 
@@ -37,6 +38,31 @@ const initialCards = [
   },
 ];
 
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "364f3f56-bdda-4a77-ae3b-ca8a2fe35e08",
+    "Content-Type": "application/json",
+  },
+});
+
+// destructure second item in callback
+
+api
+  .getAppInfo()
+  .then(([cards, users]) => {
+    cards.forEach((item) => {
+      const cardElement = getCardElement(item);
+      cardsList.prepend(cardElement);
+    });
+    users.forEach((user) => {});
+    // handle users info
+    // - set src of avatar img
+    // -set the textContent  of both text elements
+  })
+  .catch(console.error);
+
+const avatarAddButton = document.querySelector(".profile__add-btn");
 const cardAddButton = document.querySelector(".profile__add-btn");
 const profileEditButton = document.querySelector(".profile__edit-btn");
 const profileName = document.querySelector(".profile__name");
@@ -122,6 +148,10 @@ cardAddButton.addEventListener("click", () => {
   openModal(cardModal);
 });
 
+avatarAddButton.addEventListener("click", () => {
+  openModal(cardModal);
+});
+
 cardCloseButton.addEventListener("click", () => {
   closeModal(cardModal);
 });
@@ -163,9 +193,18 @@ function closeModal(modal) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = editModalNameInput.value;
-  profileDescription.textContent = editModalDescriptionInput.value;
-  closeModal(editModal);
+  api
+    .editUserInfo({
+      name: editModalNameInput.value,
+      about: editModalDescriptionInput.value,
+    })
+    .then((data) => {
+      // todo - use data argument instead of value
+      profileName.textContent = editModalNameInput.value;
+      profileDescription.textContent = editModalDescriptionInput.value;
+      closeModal(editModal);
+    })
+    .catch(console.error);
 }
 
 function handleCardFormSubmit(evt) {
@@ -180,10 +219,5 @@ function handleCardFormSubmit(evt) {
 
 editFormElement.addEventListener("submit", handleEditFormSubmit);
 cardForm.addEventListener("submit", handleCardFormSubmit);
-
-initialCards.forEach((item) => {
-  const cardElement = getCardElement(item);
-  cardsList.prepend(cardElement);
-});
 
 envableValidation(settings);
