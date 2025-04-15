@@ -55,20 +55,29 @@ api
       const cardElement = getCardElement(item);
       cardsList.prepend(cardElement);
     });
-    users.forEach((user) => {});
-    // handle users info
-    // - set src of avatar img
-    // -set the textContent  of both text elements
+    users.forEach(() => {
+      editModalNameInput.value = profileName.textContent;
+      editModalDescriptionInput.value = profileDescription.textContent;
+      resetValidation(
+        editFormElement,
+        [editModalNameInput, editModalDescriptionInput],
+        settings
+      );
+    });
+    //   // handle users info
+    //   // - set src of avatar img
+    //   // -set the textContent  of both text elements
   })
   .catch(console.error);
 
-const avatarAddButton = document.querySelector(".profile__add-btn");
+const avatarAddButton = document.querySelector(".profile__avatar-btn");
 const cardAddButton = document.querySelector(".profile__add-btn");
 const profileEditButton = document.querySelector(".profile__edit-btn");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const editModal = document.querySelector("#edit-modal");
 
+const profileAvatarImg = document.querySelector("#profile-image");
 const editFormElement = editModal.querySelector(".modal__form");
 const profileCloseBtn = document.querySelector("#profile-close-btn");
 const editModalNameInput = document.querySelector("#name");
@@ -80,6 +89,14 @@ const cardForm = cardModal.querySelector(".modal__form");
 const cardSubmitButton = cardModal.querySelector(".modal__submit-btn");
 const cardLinkInput = cardModal.querySelector("#add-card-link");
 const cardNameInput = cardModal.querySelector("#add-card-name");
+
+// avatar form els
+const avatarModal = document.querySelector("#avatar-modal");
+const avatarCloseButton = avatarModal.querySelector("#avatar-close-btn");
+const avatarForm = avatarModal.querySelector(".modal__form");
+const avaterSubmitButton = avatarModal.querySelector(".modal__submit-btn");
+const avatarLinkInput = avatarModal.querySelector("#avatar-link");
+const avatarNameInput = avatarModal.querySelector("#avatar");
 
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
@@ -149,7 +166,7 @@ cardAddButton.addEventListener("click", () => {
 });
 
 avatarAddButton.addEventListener("click", () => {
-  openModal(cardModal);
+  openModal(avatarModal);
 });
 
 cardCloseButton.addEventListener("click", () => {
@@ -216,8 +233,20 @@ function handleCardFormSubmit(evt) {
   disableButton(cardSubmitButton, settings);
   closeModal(cardModal);
 }
+// todo - handleAvatarFormSubmit()
+
+function handleAvatarFormSubmit(evt) {
+  evt.preventDefault();
+  api
+    .editAvatarInfo(avatarLinkInput.value)
+    .then((data) => {
+      console.log(data.avatar);
+    })
+    .catch(console.error);
+}
 
 editFormElement.addEventListener("submit", handleEditFormSubmit);
 cardForm.addEventListener("submit", handleCardFormSubmit);
+avatarForm.addEventListener("submit", handleAvatarFormSubmit);
 
 envableValidation(settings);
