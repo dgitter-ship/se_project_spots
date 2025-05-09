@@ -29,6 +29,8 @@
 
 .profile__avatar {
   border-radius: 8px;
+  width: 100px;
+  height: 100px;
 }
 
 .profile__column {

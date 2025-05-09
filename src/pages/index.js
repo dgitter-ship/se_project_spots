@@ -1,4 +1,5 @@
 import Api from "../utils/Api.js";
+import { setButtonText } from "../utils/helpers.js";
 import "./index.css";
 import profileSrc from "../images/avatar.jpg";
 
@@ -48,29 +49,37 @@ const api = new Api({
 
 // destructure second item in callback
 
-api
-  .getAppInfo()
-  .then(([cards, users]) => {
-    cards.forEach((item) => {
-      const cardElement = getCardElement(item);
-      cardsList.prepend(cardElement);
-    });
-    // set the name element's text content
-    // set desc. element's text content
-    // set the avatar src
-    //   // handle users info
-    //   // - set src of avatar img
-    //   // -set the textContent  of both text elements
-    // function handleAvatarFormSubmit(evt) {
-    //   evt.preventDefault();
-    //   const avatarInputValues = {
-    //     link: profileAvatarImg.value,
-    //   };
-    //   const cardElement = getCardElement(inputValues);
-    //   cardsList.prepend(cardElement);
-    // }
-  })
-  .catch(console.error);
+// api.getAppInfo().then(([cards]) => {
+//   cards
+//     .forEach((item) => {
+//       const cardElement = getCardElement(item);
+//       cardsList.prepend(cardElement);
+//     })
+//     .catch(console.error);
+// });
+// api
+//   .getUserInfo()
+//   .then((user) => {
+//     console.log(user);
+//     profileName.textContent = user.name;
+//     editModalDescriptionInput.textContent = user.name;
+//   })
+//   .catch(console.error);
+
+// set the name element's text content
+// set desc. element's text content
+// set the avatar src
+//   // handle users info
+//   // - set src of avatar img
+//   // -set the textContent  of both text elements
+// function handleAvatarFormSubmit(evt) {
+//   evt.preventDefault();
+//   const avatarInputValues = {
+//     link: profileAvatarImg.value,
+//   };
+//   const cardElement = getCardElement(inputValues);
+//   cardsList.prepend(cardElement);
+// }
 
 const avatarAddButton = document.querySelector(".profile__avatar-btn");
 const cardAddButton = document.querySelector(".profile__add-btn");
@@ -99,9 +108,9 @@ const deleteForm = deleteModal.querySelector(".modal__form");
 const avatarModal = document.querySelector("#avatar-modal");
 const avatarCloseButton = avatarModal.querySelector("#avatar-close-btn");
 const avatarForm = avatarModal.querySelector(".modal__form");
-const avaterSubmitButton = avatarModal.querySelector(".modal__submit-btn");
+const avatarSubmitButton = avatarModal.querySelector(".modal__submit-btn");
 const avatarLinkInput = avatarModal.querySelector("#avatar-link");
-const avatarNameInput = avatarModal.querySelector("#avatar");
+const avatarImage = document.querySelector("#profile-image");
 
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
@@ -139,9 +148,15 @@ function handleDeleteCard(cardElement, cardId) {
 function handleLikeBtn(evt, id) {
   // evt.target.classList.toggle("card__like-btn_liked");
   // TODO -check whether card is like.
-  // const isLiked = evt.target;
+  const isLiked = evt.target.classList.contains("card__like-btn_liked");
   // call handleLike function passing appropriate arguments
   // handle res
+  api
+    .handleLike(id, isLiked)
+    .then(() => {
+      evt.target.classList.toggle("card__like-btn_liked");
+    })
+    .catch(console.error);
 }
 
 function getCardElement(data) {
@@ -155,6 +170,13 @@ function getCardElement(data) {
   const cardDeleteButton = cardElement.querySelector(".card__delete-btn");
 
   // if card is liked set liked class to card
+
+  // const isLiked =
+  //   data.likes && data.likes.some((like) => like._id === currentUserId);
+
+  if (data.isLiked) {
+    cardLikeButton.classList.add("card__like-btn_liked");
+  }
 
   cardNameElement.textContent = data.name;
   cardImageElement.src = data.link;
@@ -178,6 +200,35 @@ function getCardElement(data) {
   return cardElement;
 }
 
+api
+  .getAppInfo()
+  .then(([user, cards]) => {
+    console.log(user);
+    avatarImage.src = user.avatar;
+    profileName.textContent = user.name;
+    editModalDescriptionInput.textContent = user.name;
+    cards.forEach((item) => {
+      const cardElement = getCardElement(item);
+      cardsList.prepend(cardElement);
+    });
+  })
+  .catch(console.error);
+// users
+//   .forEach((user) => {
+// avatarImage.src = user.avatar;
+// profileName.textContent = user.name;
+// editModalDescriptionInput.textContent = user.name;
+//   })
+//   .catch(console.error);
+// api
+//   .getUserInfo()
+//   .then((user) => {
+//     console.log(user);
+//     profileName.textContent = user.name;
+//     editModalDescriptionInput.textContent = user.name;
+//   })
+//   .catch(console.error);
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeEscapeBtn);
@@ -192,6 +243,10 @@ profileEditButton.addEventListener("click", () => {
     settings
   );
   openModal(editModal);
+});
+
+avatarCloseButton.addEventListener("click", () => {
+  closeModal(avatarModal);
 });
 
 profileCloseBtn.addEventListener("click", () => {
@@ -247,6 +302,11 @@ function closeModal(modal) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
+
+  const submitBtn = evt.submitter;
+  // submitBtn.textContent = "Saving..."
+  setButtonText(submitBtn, true);
+
   api
     .editUserInfo({
       name: editModalNameInput.value,
@@ -258,43 +318,64 @@ function handleEditFormSubmit(evt) {
       profileDescription.textContent = editModalDescriptionInput.value;
       closeModal(editModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      // TODO - call setButtonText instead
+      // submitBtn.textContent = "Save";
+      setButtonText(submitBtn, false);
+    });
 }
-
+// TODO implement loading text for call form submissions
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
+
+  setButtonText(cardSubmitButton, true);
+
   api
     .postUserCard({
       name: cardNameInput.value,
       link: cardLinkInput.value,
     })
     .then((data) => {
-      const inputValues = {
-        name: cardNameInput.value,
-        link: cardLinkInput.value,
-      };
-      const cardElement = getCardElement(inputValues);
+      const cardElement = getCardElement(data);
       cardsList.prepend(cardElement);
       evt.target.reset();
-      disableButton(cardSubmitButton, settings);
       closeModal(cardModal);
+      //   name: cardNameInput.value,
+      //   link: cardLinkInput.value,
     })
-    .catch(console.error);
-  // const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
-  // const cardElement = getCardElement(inputValues);
-  // cardsList.prepend(cardElement);
-  // evt.target.reset();
-  // disableButton(cardSubmitButton, settings);
-  // closeModal(cardModal);
+    // const cardElement = getCardElement(inputValues);
+    // cardsList.prepend(cardElement);
+    // evt.target.reset();
+    // disableButton(cardSubmitButton, settings);
+    // closeModal(cardModal);
+    // })
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(cardSubmitButton, false);
+    });
 }
-// todo - handleAvatarFormSubmit()
+// handleAvatarFormSubmit(evt) {
+// evt.preventDefault();
+// const avatarImage = {link: avatarLinkInput.link}
+// }
+
+function setUserData(data) {
+  avatarImage.src = data.avatar;
+}
 
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
+
   api
     .editAvatarInfo(avatarLinkInput.value)
     .then((data) => {
+      console.log(avatarLinkInput.value);
       console.log(data.avatar);
+      setUserData(data);
+      evt.target.reset();
+      disableButton(avatarSubmitButton, settings);
+      closeModal(avatarModal);
     })
     .catch(console.error);
 }

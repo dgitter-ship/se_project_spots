@@ -18,7 +18,7 @@ class Api {
 
   getAppInfo() {
     // call new method in array
-    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
   }
 
   getInitialCards() {
