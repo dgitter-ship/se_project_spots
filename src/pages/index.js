@@ -102,11 +102,12 @@ const cardLinkInput = cardModal.querySelector("#add-card-link");
 const cardNameInput = cardModal.querySelector("#add-card-name");
 
 const deleteModal = document.querySelector("#delete-modal");
-const deleteForm = deleteModal.querySelector(".modal__form");
+const deleteForm = deleteModal.querySelector("#delete-form");
+const deleteModalCloseBtn = deleteModal.querySelector("#delete-close-btn");
 
 // avatar form els
+const avatarCloseButton = document.querySelector("#avatar-close-btn");
 const avatarModal = document.querySelector("#avatar-modal");
-const avatarCloseButton = avatarModal.querySelector("#avatar-close-btn");
 const avatarForm = avatarModal.querySelector(".modal__form");
 const avatarSubmitButton = avatarModal.querySelector(".modal__submit-btn");
 const avatarLinkInput = avatarModal.querySelector("#avatar-link");
@@ -203,7 +204,7 @@ function getCardElement(data) {
 api
   .getAppInfo()
   .then(([user, cards]) => {
-    console.log(user);
+    console.log(deleteModalCloseBtn);
     avatarImage.src = user.avatar;
     profileName.textContent = user.name;
     editModalDescriptionInput.textContent = user.name;
@@ -243,6 +244,10 @@ profileEditButton.addEventListener("click", () => {
     settings
   );
   openModal(editModal);
+});
+
+deleteModalCloseBtn.addEventListener("clcik", () => {
+  closeModal(deleteModal);
 });
 
 avatarCloseButton.addEventListener("click", () => {
@@ -370,8 +375,6 @@ function handleAvatarFormSubmit(evt) {
   api
     .editAvatarInfo(avatarLinkInput.value)
     .then((data) => {
-      console.log(avatarLinkInput.value);
-      console.log(data.avatar);
       setUserData(data);
       evt.target.reset();
       disableButton(avatarSubmitButton, settings);

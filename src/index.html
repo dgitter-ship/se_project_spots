@@ -188,14 +188,20 @@
       </div>
     </div>
     <div class="modal" id="delete-modal">
-      <div class="modal__container">
+      <div class="modal__container modal__delete-container">
         <button
           type="button"
-          class="modal__close-btn"
-          id="avatar-close-btn"
+          class="modal__close-btn modal__delete-close-btn"
+          id="delete-close-btn"
         ></button>
-        <h2 class="modal__title">Are you sure you want to delete this image</h2>
-        <form id="delete-form" class="modal__form" novalidate>
+        <h2 class="modal__title modal__delete-title">
+          Are you sure you want to delete this image
+        </h2>
+        <form
+          id="delete-form"
+          class="modal__form modal__delete-form"
+          novalidate
+        >
           <button type="submit" class="modal__submit-btn">Delete</button>
           <button type="button" class="modal__submit-btn">Cancel</button>
         </form>
