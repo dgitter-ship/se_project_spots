@@ -7,6 +7,7 @@ import {
   envableValidation,
   settings,
   resetValidation,
+  disableButton,
 } from "../scripts/validation.js";
 
 const imgSrc = document.getElementById("profile-image");
@@ -214,21 +215,6 @@ api
     });
   })
   .catch(console.error);
-// users
-//   .forEach((user) => {
-// avatarImage.src = user.avatar;
-// profileName.textContent = user.name;
-// editModalDescriptionInput.textContent = user.name;
-//   })
-//   .catch(console.error);
-// api
-//   .getUserInfo()
-//   .then((user) => {
-//     console.log(user);
-//     profileName.textContent = user.name;
-//     editModalDescriptionInput.textContent = user.name;
-//   })
-//   .catch(console.error);
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -246,7 +232,7 @@ profileEditButton.addEventListener("click", () => {
   openModal(editModal);
 });
 
-deleteModalCloseBtn.addEventListener("clcik", () => {
+deleteModalCloseBtn.addEventListener("click", () => {
   closeModal(deleteModal);
 });
 
@@ -372,15 +358,21 @@ function setUserData(data) {
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
 
+  setButtonText(avatarSubmitButton, true);
+
   api
     .editAvatarInfo(avatarLinkInput.value)
     .then((data) => {
+      console.log(avatarLinkInput.value);
       setUserData(data);
       evt.target.reset();
       disableButton(avatarSubmitButton, settings);
       closeModal(avatarModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(avatarSubmitButton, false);
+    });
 }
 
 editFormElement.addEventListener("submit", handleEditFormSubmit);
