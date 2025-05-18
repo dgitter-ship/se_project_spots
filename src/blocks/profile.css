@@ -17,6 +17,8 @@
   align-items: flex-end;
   justify-content: center;
   visibility: hidden;
+  border-radius: 8px;
+  background-color: #a4a4a4;
 }
 
 .profile__avatar-container:hover .profile__avatar-btn {
@@ -25,6 +27,8 @@
 
 .profile__avatar-btn::after {
   content: "Edit Avatar";
+  font-size: 12px;
+  color: #fcf5e5;
 }
 
 .profile__avatar {
@@ -124,7 +128,12 @@
 
   .profile__avatar-btn {
     visibility: visible;
-    justify-content: flex-end;
+    border-radius: 8px;
+    width: 23px;
+    height: 23px;
+    top: 52px;
+    left: 52px;
+    background-color: #21212199;
   }
 
   .profile__avatar-btn::after {

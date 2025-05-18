@@ -105,6 +105,8 @@ const cardNameInput = cardModal.querySelector("#add-card-name");
 const deleteModal = document.querySelector("#delete-modal");
 const deleteForm = deleteModal.querySelector("#delete-form");
 const deleteModalCloseBtn = deleteModal.querySelector("#delete-close-btn");
+const deleteCancelBtn = deleteModal.querySelector("#delete-cancel-btn");
+const deleteSubmitBtn = deleteModal.querySelector("#delete-modal-btn");
 
 // avatar form els
 const avatarCloseButton = document.querySelector("#avatar-close-btn");
@@ -129,6 +131,9 @@ let selectedCard, selectedCardId;
 
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
+
+  setButtonText(deleteSubmitBtn, true, "Delete", "Deleting...");
+
   api
     .deleteCard(selectedCardId)
     .then(() => {
@@ -137,7 +142,10 @@ function handleDeleteSubmit(evt) {
       selectedCard.remove();
       closeModal(deleteModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(deleteSubmitBtn, false);
+    });
 }
 
 function handleDeleteCard(cardElement, cardId) {
@@ -232,7 +240,13 @@ profileEditButton.addEventListener("click", () => {
   openModal(editModal);
 });
 
-deleteModalCloseBtn.addEventListener("click", () => {
+avatarAddButton.addEventListener("click", () => {
+  avatarLinkInput.value = avatarImage.textContent;
+  resetValidation(avatarForm, [avatarLinkInput], settings);
+  openModal(avatarModal);
+});
+
+deleteCancelBtn.addEventListener("click", () => {
   closeModal(deleteModal);
 });
 
@@ -246,10 +260,6 @@ profileCloseBtn.addEventListener("click", () => {
 
 cardAddButton.addEventListener("click", () => {
   openModal(cardModal);
-});
-
-avatarAddButton.addEventListener("click", () => {
-  openModal(avatarModal);
 });
 
 cardCloseButton.addEventListener("click", () => {
@@ -363,7 +373,6 @@ function handleAvatarFormSubmit(evt) {
   api
     .editAvatarInfo(avatarLinkInput.value)
     .then((data) => {
-      console.log(avatarLinkInput.value);
       setUserData(data);
       evt.target.reset();
       disableButton(avatarSubmitButton, settings);

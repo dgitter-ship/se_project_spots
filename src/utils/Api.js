@@ -4,6 +4,12 @@ class Api {
     this._headers = headers;
   }
 
+  checkResponse(res) {
+    if (res.ok) {
+      return res;
+    }
+  }
+
   // another method for getUserInfo (different base url) .. below ;
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {

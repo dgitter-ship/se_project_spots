@@ -274,6 +274,9 @@
     max-width: 175px;
   }
 
+  .profile__avatar {
+  }
+
   .avatar__modal-tile {
     position: relative;
     top: -11px;

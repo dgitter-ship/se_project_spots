@@ -11,4 +11,7 @@ export function setButtonText(
     //set not loading text
     btn.textContent = defaultText;
   }
+  if ((defaultText = "Delete")) {
+    loadingText = "Deleting...";
+  }
 }
