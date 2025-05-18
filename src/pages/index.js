@@ -106,7 +106,7 @@ const deleteModal = document.querySelector("#delete-modal");
 const deleteForm = deleteModal.querySelector("#delete-form");
 const deleteModalCloseBtn = deleteModal.querySelector("#delete-close-btn");
 const deleteCancelBtn = deleteModal.querySelector("#delete-cancel-btn");
-const deleteSubmitBtn = deleteModal.querySelector("#delete-modal-btn");
+const deleteSubmitBtn = deleteModal.querySelector(".modal__delete-submit-btn");
 
 // avatar form els
 const avatarCloseButton = document.querySelector("#avatar-close-btn");
