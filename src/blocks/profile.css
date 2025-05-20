@@ -18,7 +18,12 @@
   justify-content: center;
   visibility: hidden;
   border-radius: 8px;
-  background-color: #a4a4a4;
+  background-color: #00000080;
+  opacity: 50%;
+}
+
+.profile__pencil-icon {
+  padding: 0 0 12px;
 }
 
 .profile__avatar-container:hover .profile__avatar-btn {
@@ -29,6 +34,7 @@
   content: "Edit Avatar";
   font-size: 12px;
   color: #fcf5e5;
+  padding: 0 0 12px;
 }
 
 .profile__avatar {

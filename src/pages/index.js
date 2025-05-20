@@ -104,7 +104,9 @@ const cardNameInput = cardModal.querySelector("#add-card-name");
 
 const deleteModal = document.querySelector("#delete-modal");
 const deleteForm = deleteModal.querySelector("#delete-form");
-const deleteModalCloseBtn = deleteModal.querySelector("#delete-close-btn");
+const deleteModalCloseBtn = deleteModal.querySelector(
+  ".modal__delete-close-btn"
+);
 const deleteCancelBtn = deleteModal.querySelector("#delete-cancel-btn");
 const deleteSubmitBtn = deleteModal.querySelector(".modal__delete-submit-btn");
 
@@ -144,7 +146,7 @@ function handleDeleteSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText(deleteSubmitBtn, false);
+      setButtonText(deleteSubmitBtn, false, "Delete", "Deleting...");
     });
 }
 
@@ -244,6 +246,10 @@ avatarAddButton.addEventListener("click", () => {
   avatarLinkInput.value = avatarImage.textContent;
   resetValidation(avatarForm, [avatarLinkInput], settings);
   openModal(avatarModal);
+});
+
+deleteModalCloseBtn.addEventListener("click", () => {
+  closeModal(deleteModal);
 });
 
 deleteCancelBtn.addEventListener("click", () => {
